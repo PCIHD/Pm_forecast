@@ -1,6 +1,8 @@
 package com.example.myapplication.tensorflow_inference;
 
 
+
+
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;
 import android.util.Log;
@@ -12,14 +14,14 @@ import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
-public   class pm10 {
-    protected double mean = 29.494944444444446;
-    protected double std = 21.626718993905616;
+public   class pm25 {
+    protected double mean = 25.144111111111112;
+    protected double std = 17.155964586013322;
     protected Interpreter tflite;
     protected  int inp_size = 24;
     protected int op_size = 6;
 
-    protected String path =  "model_pm10.tflite";
+    protected String path =  "model_pm25.tflite";
 
 
 
@@ -44,7 +46,7 @@ public   class pm10 {
             processed_input = preprocess(input);
             tflite.run(processed_input, output);
             output = decode(output);
-            Log.d("Output.........", String.valueOf(output[0][0]));
+            //Log.d("Output.........", String.valueOf(output[0][0]));
             close();
 
 
@@ -53,7 +55,7 @@ public   class pm10 {
         } catch (Exception e){
             Log.d("error",e.getMessage());
         }
-    return output;
+        return output;
     }
     protected float[] preprocess(float[] input){
         float[] output = new float[inp_size];
